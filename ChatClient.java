@@ -17,7 +17,7 @@ public class ChatClient {
   }
 
   public static void main(String[] args) {
-    new EchoClient("localhost", 14002).go();
+    new EchoClient("localhost", 14001).go();
   }
 
 
