@@ -30,7 +30,7 @@ public class ChatClient {
       //String str = userInput.readLine();
 
       PrintWriter output = new PrintWriter(server.getOutputStream(), true);
-      output.println(str);
+      //output.println(str);
       
       //Receives input message from server and outputs message received
       BufferedReader input = new BufferedReader(new InputStreamReader(server.getInputStream()));
