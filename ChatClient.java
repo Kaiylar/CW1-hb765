@@ -26,11 +26,23 @@ public class ChatClient {
 			System.out.println("Client started");
 
       BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-      System.out.println("Enter a string:\n");
-      String str = userInput.readLine();
+      System.out.println("Enter a string:");
+      //String str = userInput.readLine();
 
       PrintWriter output = new PrintWriter(server.getOutputStream(), true);
       output.println(str);
+      
+      //Receives input message from server and outputs message received
+      BufferedReader input = new BufferedReader(new InputStreamReader(server.getInputStream()));
+      //System.out.println(input.printLine);
+
+      while (true) {
+        String userIn = userInput.readLine();
+				output.println(userIn);
+        
+				String serverRes = input.readLine();
+				System.out.println(serverRes);
+      }
 		}
     catch (IOException e) {
 			e.printStackTrace();
@@ -46,7 +58,7 @@ public class ChatClient {
   }
 
   public static void main(String[] args) {
-    for (String str: args) {
+    /*for (String str: args) {
       if ((str.charAt(0) == "−") || (str.charAt(0) == "-")) {
         int newPort = str;
       }
@@ -65,9 +77,9 @@ public class ChatClient {
           }
         }
       }
-    }
+    }*/
 
-    new EchoClient("localhost", 14001).run();
+    new ChatClient("localhost", 14001).run();
   }
 
 
