@@ -23,14 +23,21 @@ public class ChatClient {
 
   public void run() {
     try {
-			
+			System.out.println("Client started");
+
+      BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+      System.out.println("Enter a string:\n");
+      String str = userInput.readLine();
+
+      PrintWriter output = new PrintWriter(server.getOutputStream(), true);
+      output.println(str);
 		}
     catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally {
 			try {
-				input.close();
+				server.close();
 			}
       catch (IOException e) {
 				e.printStackTrace();
@@ -39,7 +46,26 @@ public class ChatClient {
   }
 
   public static void main(String[] args) {
-    
+    for (String str: args) {
+      if ((str.charAt(0) == "−") || (str.charAt(0) == "-")) {
+        int newPort = str;
+      }
+      else if (str.charAt(3) == ".") {
+        int newAddress = str;
+      }
+      else {
+        int firstArg;
+        if (args.length > 0) {
+          try {
+            firstArg = Integer.parseInt(args[0]);
+          }
+          catch (NumberFormatException e) {
+            System.err.println("Argument" + args[0] + " must be an integer.");
+            System.exit(1);
+          }
+        }
+      }
+    }
 
     new EchoClient("localhost", 14001).run();
   }
